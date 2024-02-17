@@ -72,90 +72,58 @@ void loop() {
 
     
 
-  // } else {
-
-  //   routePtr = (blockNumber - 1) * 4 + !pickup * 2 + blockType;
-
-  //   if (routePtr < 0) {                   // from start to block 1
-
-  //     updatelinesensors();
-  //     while (valLeft == 0 || valRight == 0) {   // leave start block
-  //       gostraight();
-  //       delay(5);
-  //       updatelinesensors();
-  //     }
-
-  //     routefollow("SLR", 3);
-  //     float usVal = analogRead(usSensorPin);
-  //     float usDistance = usVal * maxRange  / adcSolution;
-  //     Serial.println(usDistance);
-  //     identifyblock();
-
-  //   } else if (routePtr >= 14) {          // return to finish
-  //     junctionrotation('R');
-  //     int numberOfJunctions = sizeOfRoutes[routePtr];
-  //     routefollow(routes[routePtr], numberOfJunctions);
-  //     while (1) {                         // stop after finish
-  //       stopmoving();
-  //     }    
-  //   } else {
-  //     if (!pickup || blockNumber == 1 || blockNumber == 2) {           // u turn to leave outpost and residential area
-  //       junctionrotation('R');                                         
-  //     }
-  //     int numberOfJunctions = sizeOfRoutes[routePtr];
-  //     routefollow(routes[routePtr], numberOfJunctions);
-
-  //     if ((blockNumber == 2 || blockNumber == 3) && !pickup) {         // arrived open area
-  //       findandapproachblock(); 
-  //       identifyblock();
-  //       float usVal = analogRead(usSensorPin);
-  //       float usDistance = usVal * maxRange  / adcSolution;
-  //       Serial.println(usDistance);
-  //       delay(500);
-  //       returntoline();
-  //     } else if (pickup) {                                             // arrived outpost
-  //       releaseblock();                                                // ********COMMENT THIS IF WE ARE GIVING UP SOLID BLOCK*********
-  //       // if (blockType == 0) {                                         // ********UNCOMMENT THIS IF WE ARE GIVING UP SOLID BLOCK*********
-  //       //   releaseblock();
-  //       // }
-  //       backwardawhile(350);
-  //     } else if ((blockNumber == 0 || blockNumber == 1) && !pickup) {  // arrived residential area                                                         
-  //       identifyblock();
-  //       float usVal = analogRead(usSensorPin);
-  //       float usDistance = usVal * maxRange  / adcSolution;
-  //       Serial.println(usDistance);
-  //     }
-  //   }
-
-  // }
-
-
-
-  // } else {
-  //   updatelinesensors();
-  //   while (valLeft == 0 || valRight == 0) {   // leave start block
-  //     gostraight();
-  //     delay(5);
-  //     updatelinesensors();
-  //   }
-
-
-
-  //   routefollow("SLR", 3);
-  //   float usVal = analogRead(usSensorPin);
-  //   float usDistance = usVal * maxRange  / adcSolution;
-  //   Serial.println(usDistance);
-  //   identifyblock();
-  //   while(1) {
-  //   stopmoving();}
-  // }
-
   } else {
-    liftblock();
-    delay(1000);
-    releaseblock();
-    start = 0;
-  }
 
+    routePtr = (blockNumber - 1) * 4 + !pickup * 2 + blockType;
+
+    if (routePtr < 0) {                   // from start to block 1
+
+      updatelinesensors();
+      while (valLeft == 0 || valRight == 0) {   // leave start block
+        gostraight();
+        delay(5);
+        updatelinesensors();
+      }
+
+      routefollow("SLR", 3);
+      float usVal = analogRead(usSensorPin);
+      float usDistance = usVal * maxRange  / adcSolution;
+      Serial.println(usDistance);
+      identifyblock();
+
+    } else if (routePtr >= 14) {          // return to finish
+      junctionrotation('R');
+      int numberOfJunctions = sizeOfRoutes[routePtr];
+      routefollow(routes[routePtr], numberOfJunctions);
+      while (1) {                         // stop after finish
+        stopmoving();
+      }    
+    } else {
+      if (!pickup || blockNumber == 1 || blockNumber == 2) {           // u turn to leave outpost and residential area
+        junctionrotation('R');                                         
+      }
+      int numberOfJunctions = sizeOfRoutes[routePtr];
+      routefollow(routes[routePtr], numberOfJunctions);
+
+      if ((blockNumber == 2 || blockNumber == 3) && !pickup) {         // arrived open area
+        findandapproachblock(); 
+        identifyblock();
+        float usVal = analogRead(usSensorPin);
+        float usDistance = usVal * maxRange  / adcSolution;
+        Serial.println(usDistance);
+        delay(500);
+        returntoline();
+      } else if (pickup) {                                             // arrived outpost
+        releaseblock();                                              
+        backwardawhile(350);
+      } else if ((blockNumber == 0 || blockNumber == 1) && !pickup) {  // arrived residential area                                                         
+        identifyblock();
+        float usVal = analogRead(usSensorPin);
+        float usDistance = usVal * maxRange  / adcSolution;
+        Serial.println(usDistance);
+      }
+    }
+
+  }
 
 }
