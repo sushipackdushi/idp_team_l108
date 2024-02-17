@@ -24,8 +24,6 @@ void identifyblock() {
 
     blockType = 1;        // update block type
 
-    // pickup = 1;          // ********UNCOMMENT THIS IF WE ARE GIVING UP SOLID BLOCK*********
-
   } else if (usDistance > solidUpperBound && usDistance <= foamUpperBound) {
     // FOAM block
 
@@ -66,5 +64,5 @@ void releaseblock() {
     delay(15);
   }
 
-  pickup = 0; // Set the boolean to 0 indicating that the block is released
+  pickup = 0; // Set the boolean to false indicating that the block is released
 }
