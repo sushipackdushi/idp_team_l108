@@ -28,8 +28,8 @@ void updatelinesensors() {
   valSideLeft = digitalRead(lineSideLeftPin); // read side left input value
 }
 
-void junctionrotation(char Direction[2]) {    // C++ requires 2 spaces to store 1 character
-                                              // Direction == "R" means turn right, "L" means left, "S" means straight line
+void junctionrotation(char Direction[2]) {    // Direction == "R" means turn right, "L" means left, "S" means straight line
+                                              
     // Serial.println("junction rotation");
     
     updateleftmotorspeed(RotationSpeed);      // set constant rotate speed
