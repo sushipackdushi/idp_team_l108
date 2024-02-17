@@ -54,12 +54,10 @@ int valLeft = digitalRead(lineleftPin); // read left input value
 int valRight = digitalRead(linerightPin); // read right input value
 int valSideRight = digitalRead(lineSideRightPin); // read side right input value
 int valSideLeft = digitalRead(lineSideLeftPin); // read side left input value
-// finger covering line sensor, line sensor lighting up means a reading of 1
 
-// // Set ultrasonic and ToF sensors to input pins
+// Set ToF sensor to input pins
 DFRobot_VL53L0X sensor; 
-// int usDistance = sensor.getDistance();
-// int tofDistance = sensor.getDistance();
+
 
 
 
@@ -84,7 +82,7 @@ const char routes[16][6] = {
           "LSRS",             // 13: block 4 to red
           "RSRS",              // 14: green to finish
           "LLS"};              // 15: red to finish
-      // no need junctionrotation('R') (u turn): 
+
 
   // REMEMBER TO CHANGE SIZEOFROUTES ARRAY AFTER CHANGING ROUTES
 
@@ -122,11 +120,5 @@ void backwardawhile(int time);
 void findandapproachblock();
 void returntoline();
 void routefollow(const char route[], int numberOfJunctions);
-// void liftblock();
-// void release();
-// void identifyblock();
-
-
-
 
 #endif
